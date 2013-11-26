@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: Universidad de La Frontera
+License Type: Academic
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="orm.Consumo" table="Consumo" lazy="false">
+		<meta attribute="class-description">
+			Almacena consumo de las cuentas del cliente
+		</meta>
+		<id name="id" column="id" type="integer" unsaved-value="0">
+			<generator class="increment">
+			</generator>
+		</id>
+		<property name="consumo" column="consumo" type="integer" length="10" not-null="true" lazy="false"/>
+		<property name="monto" column="monto" type="integer" length="10" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Monto totaal
+			</meta>
+		</property>
+		<property name="morosidad" column="morosidad" type="boolean" length="1" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				Debe o no debe
+			</meta>
+		</property>
+		<property name="fecha_vencimiento" column="fecha_vencimiento" type="string" length="25" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				fecha vencimiento
+			</meta>
+		</property>
+		<many-to-one name="login" cascade="lock" column="Loginid" class="orm.Login" not-null="true" lazy="no-proxy" access="field">
+		</many-to-one>
+		<many-to-one name="cuenta" cascade="lock" column="Cuentaid" class="orm.Cuenta" not-null="true" lazy="no-proxy" access="field">
+		</many-to-one>
+	</class>
+</hibernate-mapping>

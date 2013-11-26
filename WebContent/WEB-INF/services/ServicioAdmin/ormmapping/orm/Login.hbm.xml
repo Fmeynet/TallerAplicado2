@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: Universidad de La Frontera
+License Type: Academic
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="orm.Login" table="Login" lazy="false">
+		<meta attribute="class-description">
+			Tabla almacena la fecha y un token cuando el administrador logea
+		</meta>
+		<id name="id" column="id" type="integer" unsaved-value="0">
+			<generator class="increment">
+			</generator>
+		</id>
+		<property name="token" column="token" type="string" length="100" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				token login del usuario
+			</meta>
+		</property>
+		<property name="fecha_ini" column="fecha_ini" type="string" length="25" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				fecha inicio del login
+			</meta>
+		</property>
+		<property name="fecha_fin" column="fecha_fin" type="string" length="25" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				fin del token
+			</meta>
+		</property>
+		<many-to-one name="administrador" cascade="lock" column="administradorid" class="orm.Administrador" not-null="true" lazy="no-proxy" access="field">
+		</many-to-one>
+		<set name="ORM_Consumo" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="Loginid" not-null="true"/>
+			<one-to-many class="orm.Consumo"/>
+		</set>
+		<set name="ORM_Cuenta" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="Loginid" not-null="true"/>
+			<one-to-many class="orm.Cuenta"/>
+		</set>
+		<set name="ORM_Cliente" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="Loginid" not-null="true"/>
+			<one-to-many class="orm.Cliente"/>
+		</set>
+		<set name="ORM_Historico_cliente" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="Loginid" not-null="true"/>
+			<one-to-many class="orm.Historico_cliente"/>
+		</set>
+	</class>
+</hibernate-mapping>

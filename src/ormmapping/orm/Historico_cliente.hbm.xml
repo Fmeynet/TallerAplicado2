@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: Universidad de La Frontera
+License Type: Academic
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="orm.Historico_cliente" table="historico_cliente" lazy="false">
+		<meta attribute="class-description">
+			Historial de los clientes
+		</meta>
+		<id name="id" column="id" type="integer" unsaved-value="0">
+			<generator class="increment">
+			</generator>
+		</id>
+		<property name="rut" column="rut" type="string" length="10" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				rut historico cliente
+			</meta>
+		</property>
+		<property name="nombre" column="nombre" type="string" length="50" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				nombre cliente
+			</meta>
+		</property>
+		<property name="apellido_p" column="apellido_p" type="string" length="20" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				apellido paterno cliente
+			</meta>
+		</property>
+		<property name="apellido_m" column="apellido_m" type="string" length="20" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				apellido materno cliente
+			</meta>
+		</property>
+		<property name="celular" column="celular" type="string" length="15" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				celular cliente
+			</meta>
+		</property>
+		<property name="correo" column="correo" type="string" length="50" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				correo del cliente
+			</meta>
+		</property>
+		<property name="direccion" column="direccion" type="string" length="50" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				correo cliente
+			</meta>
+		</property>
+		<many-to-one name="cliente" cascade="lock" column="clienteid" class="orm.Cliente" not-null="true" lazy="no-proxy" access="field">
+		</many-to-one>
+		<many-to-one name="login" cascade="lock" column="Loginid" class="orm.Login" not-null="true" lazy="no-proxy" access="field">
+		</many-to-one>
+	</class>
+</hibernate-mapping>

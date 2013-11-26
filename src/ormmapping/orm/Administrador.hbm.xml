@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: Universidad de La Frontera
+License Type: Academic
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="orm.Administrador" table="administrador" lazy="false">
+		<meta attribute="class-description">
+			Tabla que almacena usuarios administradores
+		</meta>
+		<id name="id" column="id" type="integer" unsaved-value="0">
+			<generator class="increment">
+			</generator>
+		</id>
+		<property name="usuario" column="usuario" type="string" length="50" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				nombre de usuario
+			</meta>
+		</property>
+		<property name="password" column="password" type="string" length="50" not-null="true" lazy="false">
+			<meta attribute="field-description">
+				contrase&#241;a del usuario
+			</meta>
+		</property>
+		<set name="ORM_Login" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="administradorid" not-null="true"/>
+			<one-to-many class="orm.Login"/>
+		</set>
+	</class>
+</hibernate-mapping>
